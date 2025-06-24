@@ -94,4 +94,9 @@ with open("output.json", "w", encoding='utf-8') as new_file:
 print("The writings on the file is finished !!!")
 ```
 
+## ✅ Output Image
+
+![Alt text](Output.PNG)
+
 Displays a confirmation that the JSON file has been successfully written.
+

@@ -2,13 +2,13 @@
 import json
 import PyPDF2
 
-with open("Form ADT-1-29092023_signed.pdf", "rb") as file:
+with open("Form ADT-1-29092023_signed.pdf", "rb") as file: # Reading the pdf file and extracting texts
 
     reader = PyPDF2.PdfReader(file)
     extracted_texts = reader.get_form_text_fields()
 
 
-    formatted_key = {
+    formatted_key = {  # Making a dictionary of formatted keys
 
         "CIN_C[0]" : "CIN",
         "CompanyName_C[0]" : "Company_Name",
@@ -34,19 +34,19 @@ with open("Form ADT-1-29092023_signed.pdf", "rb") as file:
     new_dict = {}
 
 
-    for key, value in extracted_texts.items():
+    for key, value in extracted_texts.items(): # Generating a dictionary with formatted key-value pairs
         if value:
             if "\r" in value:
                 value = value.replace("\r", " ")
 
-            new_key = formatted_key.get(key, key)
+            new_key = formatted_key.get(key, key) # Replacing keys of valid key-value with understandable keys
 
-            if "[0]" in new_key:
+            if "[0]" in new_key: # Filtering out the unnecessary key-value pairs
                 continue
 
             new_dict[new_key] = value
 
-with open("output.json", "w", encoding='utf-8') as new_file:
+with open("output.json", "w", encoding='utf-8') as new_file: # Writing the dictionary in the output.json file
     json.dump(new_dict, new_file, indent=4)
 
 print("The writings on the file is finished !!!")
